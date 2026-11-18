@@ -2,7 +2,8 @@
 set -euo pipefail
 ROOT="${0:A:h}"
 APP="$ROOT/build/Quickshot.app"
-mkdir -p "$APP/Contents/MacOS" "$HOME/.cache/quickshot-swift"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$HOME/.cache/quickshot-swift"
+cp "$ROOT/Assets/Quickshot.icns" "$APP/Contents/Resources/Quickshot.icns"
 xcrun swiftc -O -swift-version 5 -target arm64-apple-macosx14.0 -module-cache-path "$HOME/.cache/quickshot-swift" -framework AppKit -framework CoreServices -framework CoreText -framework ImageIO -framework UniformTypeIdentifiers "$ROOT/Sources/Quickshot.swift" -o "$APP/Contents/MacOS/Quickshot"
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -11,9 +12,10 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 <key>CFBundleExecutable</key><string>Quickshot</string>
 <key>CFBundleIdentifier</key><string>local.quickshot</string>
 <key>CFBundleName</key><string>Quickshot</string>
+<key>CFBundleIconFile</key><string>Quickshot.icns</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>1.1</string>
-<key>CFBundleVersion</key><string>2</string>
+<key>CFBundleShortVersionString</key><string>1.1.1</string>
+<key>CFBundleVersion</key><string>3</string>
 <key>LSMinimumSystemVersion</key><string>14.0</string>
 <key>LSUIElement</key><true/>
 <key>NSHighResolutionCapable</key><true/>

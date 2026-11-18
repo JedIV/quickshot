@@ -1,5 +1,7 @@
 # Quickshot
 
+<img src="Assets/Quickshot.png" width="96" alt="Quickshot target icon">
+
 Fast, native Mac screenshot annotations. No toolbar.
 
 ## Install
