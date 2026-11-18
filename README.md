@@ -1,37 +1,32 @@
 # Quickshot
 
-A tiny native Mac screenshot annotator. No toolbar, onboarding, network access, or third-party dependencies.
+Fast, native Mac screenshot annotations. No toolbar.
 
-- Drag for an arrow. Shift-drag for a box.
-- Click and type to add text. Click existing text to edit it.
-- Return adds a line; Cmd–Return finishes editing; Escape cancels the edit.
-- Close the window to copy a full-resolution PNG and return to your previous app.
-- Cmd–Z / Shift–Cmd–Z undo and redo. Delete removes the last annotation when you’re not typing.
-- Cmd–C copies the image when you’re not editing text.
+## Install
 
-Quickshot stays ready in the background and starts at login. It uses macOS’s existing **save a selected area to a file** shortcut—normally Cmd–Shift–4, or your custom shortcut. It does not register or change keyboard shortcuts. Clipboard-only screenshot shortcuts bypass Quickshot.
-
-## Build and install
-
-Requires Apple silicon, macOS 14 or later, and Apple’s Command Line Tools (`xcode-select --install`).
+Apple silicon, macOS 14+, and Command Line Tools (`xcode-select --install`).
 
 ```sh
+git clone https://github.com/JedIV/quickshot.git
+cd quickshot
 ./build.sh
 ./scripts/install-launchagent.sh
 ```
 
-The installer places the app in `~/Applications`, saves screenshots in `~/Pictures/Quickshot`, and disables the floating screenshot thumbnail so images open immediately. Original screenshots are preserved. Previous screenshot settings are backed up locally in `state/`.
+Starts at login. Screenshots go to `~/Pictures/Quickshot`; the floating thumbnail is disabled for speed. Original images are preserved.
 
-Stop Quickshot and restore those settings:
+## Use
 
-```sh
-./scripts/uninstall.sh
-```
+Capture a region with macOS’s **save-to-file** shortcut (normally ⌘⇧4; custom bindings work too).
 
-## Verify
+- **Drag:** arrow. **Shift-drag:** box.
+- **Click and type:** text. Click existing text to edit.
+- **⌘Return:** finish typing. **Escape:** cancel the edit.
+- **Delete:** remove the last annotation when not typing. **⌘Z:** undo.
+- **Close / ⌘W:** copy the annotated PNG at full resolution.
 
-```sh
-./scripts/test.sh
-```
+Clipboard-only capture shortcuts bypass Quickshot.
 
-Tests exercise drag gestures, text entry/editing/deletion/cancellation, undo/redo, Retina export, and copying text that is still being edited when the window closes. They use an offscreen AppKit window in a normal macOS login session, preserve the clipboard, and save generated fixtures in `build/test-results/`.
+Stop and restore previous screenshot settings: `./scripts/uninstall.sh`
+
+Run tests: `./scripts/test.sh`
